@@ -22,6 +22,7 @@ $(function() {
          * page?
          */
         it('are defined', function() {
+            // means contents in allFeeds shouldn't be empty
             expect(allFeeds).toBeDefined();
             expect(allFeeds.length).not.toBe(0);
         });
@@ -31,12 +32,25 @@ $(function() {
          * in the allFeeds object and ensures it has a URL defined
          * and that the URL is not empty.
          */
+         it('has no empty URL in allFeeds', function() {
+            allFeeds.forEach(function(item, index){
+                expect(item.url).toBeDefined();
+                expect(item.url.length).not.toBe(0);
+            });
+         });
 
 
         /* TODO: Write a test that loops through each feed
          * in the allFeeds object and ensures it has a name defined
          * and that the name is not empty.
          */
+         it('has no empty name in allFeeds', function(){
+            allFeeds.forEach(function(item, index){
+                expect(item.name).toBeDefined();
+                expect(item.name.length).not.toBe(0);
+            });
+         });
+
     });
 
 
