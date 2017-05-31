@@ -1,4 +1,4 @@
-/* fe]edreader.js
+/* feedreader.js
  *
  * This is the spec file that Jasmine will read and contains
  * all of the tests that will be run against your application.
@@ -55,6 +55,36 @@ $(function() {
 
     /* TODO: Write a new test suite named "The menu" */
     describe("The menu", function(){
+         var self = this;
+
+         beforeEach(function(done){
+            self.regex = /\((.+)\)/g;
+            $(".menu-icon-link").trigger("click");
+            setTimeout(function(){
+                done();
+            }, 200);
+
+         });
+
+         /* TODO: Write a test that ensures the menu changes
+          * visibility when the menu icon is clicked. This test
+          * should have two expectations: does the menu display when
+          * clicked and does it hide when clicked again.
+          */
+       it("changes visibility when menu icon is clicked", function(done){
+
+            // TODO: How to hide menu
+            // when the menu is shown, the class `menu-hidden` must be removed from <body>
+            var valueOfTransform3dAfterClick =  $(".slide-menu").css("transform");
+            var shiftFromScreenInStrAfterClick = (((self.regex.exec(valueOfTransform3dAfterClick))[1]).split(","))[4];
+            var shiftFromScreenAfterClick = parseInt(shiftFromScreenInStrAfterClick);
+            var classNameForBodyAfterClick = $("body").attr("class");
+
+            expect(classNameForBodyAfterClick).not.toBe("menu-hidden");
+            expect(shiftFromScreenAfterClick).toBe(0);
+            done();
+        });
+
         /* TODO: Write a test that ensures the menu element is
          * hidden by default. You'll have to analyze the HTML and
          * the CSS to determine how we're performing the
@@ -62,21 +92,18 @@ $(function() {
          */
 
         // when the menu is hidden, the class 'menu-hidden' must be attached to <body>
-        // when the menu is hidden, it is shifted off from the screen by 12em
-        // when the menu is shown, the class `menu-hidden` must be removed from <body>
-        it("keeps menu hidden by default",function(){
+        // when the menu is hidden, div.slide-menu is shifted off from the screen by 12em
+        it("keeps menu hidden by default",function(done){
+            // TODO: find out how to extract the value of a class property using JQuery
+            var valueOfTransform3d =  $(".slide-menu").css("transform");
+            var shiftFromScreenInStr = (((self.regex.exec(valueOfTransform3d))[1]).split(","))[4];
+            var shiftFromScreen = parseInt(shiftFromScreenInStr);
+            var classNameForBody = $("body").attr("class");
 
+            expect(classNameForBody).toBe("menu-hidden");
+            expect(shiftFromScreen).toBeLessThan(0);
+            done();
         });
-
-         /* TODO: Write a test that ensures the menu changes
-          * visibility when the menu icon is clicked. This test
-          * should have two expectations: does the menu display when
-          * clicked and does it hide when clicked again.
-          */
-        it("changes visibility when menu icon is clicked", function(){
-
-        });
-
     });
 
     /* TODO: Write a new test suite named "Initial Entries" */
